@@ -1,5 +1,5 @@
 /**
- * PRODUKTE VON LIVION
+ * PRODUKTE VON MADAN
  * ---------------------------------------------------------------
  * Hier trägt ihr neue Produkte ein — kein Programmieren nötig.
  * Einfach ein neues { ... } Objekt in die Liste kopieren und ausfüllen,
@@ -16,36 +16,36 @@
  *               — leer lassen ("") falls kein Bild vorhanden
  * ---------------------------------------------------------------
  */
-
+ 
 window.PRODUCTS = [
   {
-    id: "livion-core",
-    name: "Livion Core",
+    id: "madan-core",
+    name: "MADAN Core",
     tagline: "Das Fundament — schnell eingerichtet, einfach erweiterbar.",
     description:
-      "Livion Core ist unser Basisprodukt. Es bildet die Grundlage für alle weiteren Livion-Werkzeuge und lässt sich in wenigen Minuten einrichten.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
+      "MADAN Core ist unser Basisprodukt. Es bildet die Grundlage für alle weiteren MADAN-Werkzeuge und lässt sich in wenigen Minuten einrichten.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
   },
   {
-    id: "livion-flow",
-    name: "Livion Flow",
+    id: "madan-flow",
+    name: "MADAN Flow",
     tagline: "Abläufe automatisieren, ohne den Überblick zu verlieren.",
     description:
-      "Livion Flow hilft dabei, wiederkehrende Aufgaben zu automatisieren und Prozesse übersichtlich darzustellen.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
+      "MADAN Flow hilft dabei, wiederkehrende Aufgaben zu automatisieren und Prozesse übersichtlich darzustellen.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
   },
   {
-    id: "livion-pulse",
-    name: "Livion Pulse",
+    id: "madan-pulse",
+    name: "MADAN Pulse",
     tagline: "Alle wichtigen Kennzahlen auf einen Blick.",
     description:
-      "Livion Pulse zeigt die wichtigsten Kennzahlen in Echtzeit und macht Entwicklungen sofort sichtbar.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
+      "MADAN Pulse zeigt die wichtigsten Kennzahlen in Echtzeit und macht Entwicklungen sofort sichtbar.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
   },
-
+ 
   // Neues Produkt? Beispiel zum Kopieren:
   // {
   //   id: "mein-neues-produkt",
