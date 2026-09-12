@@ -1,122 +1,316 @@
-(function () {
-  "use strict";
+/* ==========================================================================
+   MADAN — Design Tokens
+   ========================================================================== */
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #6e6e6e;
+  --border: #e2e2e2;
+  --surface: #fafafa;
+  --focus: #0a0a0a;
  
-  var products = window.PRODUCTS || [];
-  var grid = document.getElementById("product-grid");
-  var overlay = document.getElementById("overlay");
-  var panelContent = document.getElementById("panel-content");
-  var closeBtn = document.getElementById("close-btn");
-  var yearEl = document.getElementById("year");
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
  
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
+  --max-width: 1080px;
+  --gap: 1px; /* hairline grid gaps read as structure, not decoration */
+}
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+html {
+  -webkit-font-smoothing: antialiased;
+}
+ 
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+ 
+a {
+  color: inherit;
+}
+ 
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
+}
  
-  function renderGrid() {
-    grid.innerHTML = "";
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
  
-    if (!products.length) {
-      var empty = document.createElement("div");
-      empty.className = "empty-state";
-      empty.innerHTML =
-        "<strong>Noch keine Produkte</strong>Neue Produkte werden in products.js eingetragen.";
-      grid.appendChild(empty);
-      return;
-    }
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  padding: 32px clamp(20px, 5vw, 64px) 0;
+}
  
-    products.forEach(function (product) {
-      var card = document.createElement("button");
-      card.className = "product-card";
-      card.type = "button";
-      card.setAttribute("aria-haspopup", "dialog");
+.brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--fg);
+}
  
-      var top = document.createElement("div");
-      top.className = "card-top";
+.brand-logo {
+  width: 40px;
+  height: auto;
+  display: block;
+}
  
-      var h2 = document.createElement("h2");
-      h2.textContent = product.name;
+.wordmark {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+  color: var(--fg);
+}
  
-      var arrow = document.createElement("span");
-      arrow.className = "arrow";
-      arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "↗";
+/* ==========================================================================
+   Intro
+   ========================================================================== */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 64px);
+}
  
-      top.appendChild(h2);
-      top.appendChild(arrow);
+.intro {
+  padding: 72px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--gap);
+}
  
-      var tagline = document.createElement("p");
-      tagline.className = "tagline";
-      tagline.textContent = product.tagline || "";
+.intro h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 6vw, 52px);
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
  
-      card.appendChild(top);
-      card.appendChild(tagline);
+.intro-text {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 46ch;
+  margin: 0;
+}
  
-      card.addEventListener("click", function () {
-        openPanel(product);
-      });
+/* ==========================================================================
+   Product grid
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 96px;
+}
  
-      grid.appendChild(card);
-    });
+@media (max-width: 860px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
  
-  var lastFocused = null;
- 
-  function openPanel(product) {
-    lastFocused = document.activeElement;
- 
-    var html = "";
-    html += '<p class="panel-eyebrow">MADAN</p>';
-    html += "<h2 id=\"panel-title\">" + escapeHtml(product.name) + "</h2>";
- 
-    if (product.price) {
-      html += '<p class="price">' + escapeHtml(product.price) + "</p>";
-    }
- 
-    if (product.image) {
-      html +=
-        '<img class="product-image" src="' +
-        escapeHtml(product.image) +
-        '" alt="" />';
-    }
- 
-    html +=
-      '<div class="description">' +
-      escapeHtml(product.description || "") +
-      "</div>";
- 
-    panelContent.innerHTML = html;
-    overlay.hidden = false;
-    document.body.style.overflow = "hidden";
-    closeBtn.focus();
+@media (max-width: 560px) {
+  .product-grid {
+    grid-template-columns: 1fr;
   }
+}
  
-  function closePanel() {
-    overlay.hidden = true;
-    document.body.style.overflow = "";
-    if (lastFocused) {
-      lastFocused.focus();
-    }
+.product-card {
+  background: var(--bg);
+  padding: 32px 28px;
+  text-align: left;
+  cursor: pointer;
+  border: 0;
+  font-family: inherit;
+  color: inherit;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+ 
+.product-card:hover,
+.product-card:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+ 
+.product-card:focus-visible {
+  outline-offset: -3px;
+}
+ 
+.product-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+ 
+.product-card h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+ 
+.product-card .arrow {
+  font-size: 18px;
+  opacity: 0.5;
+  transition: transform 0.15s ease;
+}
+ 
+.product-card:hover .arrow,
+.product-card:focus-visible .arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+}
+ 
+.product-card .tagline {
+  margin-top: 16px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+ 
+/* Empty state — shown when no products exist yet */
+.empty-state {
+  grid-column: 1 / -1;
+  background: var(--bg);
+  padding: 64px 28px;
+  text-align: center;
+  color: var(--muted);
+}
+ 
+.empty-state strong {
+  display: block;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+ 
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px clamp(20px, 5vw, 64px) 48px;
+  font-size: 13px;
+  color: var(--muted);
+}
+ 
+/* ==========================================================================
+   Detail overlay
+   ========================================================================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+  animation: fade-in 0.15s ease;
+}
+ 
+.overlay[hidden] {
+  display: none;
+}
+ 
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
- 
-  function escapeHtml(str) {
-    var div = document.createElement("div");
-    div.textContent = str;
-    return div.innerHTML;
+  to {
+    opacity: 1;
   }
+}
  
-  closeBtn.addEventListener("click", closePanel);
+.panel {
+  background: var(--bg);
+  width: min(440px, 100%);
+  height: 100%;
+  padding: 40px clamp(24px, 4vw, 48px);
+  overflow-y: auto;
+  position: relative;
+  border-left: 1px solid var(--border);
+}
  
-  overlay.addEventListener("click", function (e) {
-    if (e.target === overlay) {
-      closePanel();
-    }
-  });
+.close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--fg);
+  transition: background 0.15s ease, color 0.15s ease;
+}
  
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !overlay.hidden) {
-      closePanel();
-    }
-  });
+.close-btn:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
  
-  renderGrid();
-})();
+.panel-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+ 
+.panel h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  margin: 0 0 4px;
+  padding-right: 40px;
+}
+ 
+.panel .price {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+ 
+.panel .description {
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+ 
+.panel img.product-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin: 20px 0 24px;
+}
