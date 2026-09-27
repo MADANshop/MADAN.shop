@@ -26,12 +26,26 @@
   </header>
 
   <main id="top">
-    <section class="intro">
-      <h1>Produkte</h1>
-      <p class="intro-text">Ein Überblick über alles, was wir bauen. Auf ein Produkt klicken für Details.</p>
+    <section class="view" id="home-view">
+      <div class="intro">
+        <h1>Produkte</h1>
+        <p class="intro-text">Wähle eine Kategorie, um unsere Produkte zu entdecken.</p>
+      </div>
+
+      <div class="category-grid" id="category-grid"></div>
     </section>
 
-    <section class="product-grid" id="product-grid" aria-live="polite"></section>
+    <section class="view" id="category-view" hidden>
+      <button class="back-btn" id="back-btn" type="button" aria-label="Zurück zur Startseite">
+        <span aria-hidden="true">←</span>
+      </button>
+
+      <div class="intro intro--category">
+        <h1 id="category-title"></h1>
+      </div>
+
+      <section class="product-grid" id="product-grid" aria-live="polite"></section>
+    </section>
   </main>
 
   <footer class="site-footer">
