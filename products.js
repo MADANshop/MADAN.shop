@@ -14,6 +14,10 @@
  *   price       optional, z. B. "ab 29 €/Monat" — leer lassen falls nicht relevant
  *   image       optional, Bild-URL oder Pfad zu einer Bilddatei im Projekt
  *               — leer lassen ("") falls kein Bild vorhanden
+ *   etsyUrl     Link zum Etsy-Listing dieses Produkts, z. B.
+ *               "https://www.etsy.com/de/listing/123456789/kabelkamm"
+ *               — leer lassen ("") falls noch kein Listing existiert;
+ *               im Warenkorb wird dann "Etsy-Link folgt" angezeigt
  * ---------------------------------------------------------------
  */
  
@@ -26,6 +30,7 @@ window.PRODUCTS = [
       "MADAN Core ist unser Basisprodukt. Es bildet die Grundlage für alle weiteren MADAN-Werkzeuge und lässt sich in wenigen Minuten einrichten.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
+    etsyUrl: "",
   },
   {
     id: "madan-flow",
@@ -35,6 +40,7 @@ window.PRODUCTS = [
       "MADAN Flow hilft dabei, wiederkehrende Aufgaben zu automatisieren und Prozesse übersichtlich darzustellen.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
+    etsyUrl: "",
   },
   {
     id: "madan-pulse",
@@ -44,6 +50,7 @@ window.PRODUCTS = [
       "MADAN Pulse zeigt die wichtigsten Kennzahlen in Echtzeit und macht Entwicklungen sofort sichtbar.\n\nBeispieltext — bitte durch eure echte Produktbeschreibung ersetzen.",
     price: "",
     image: "",
+    etsyUrl: "",
   },
  
   // Neues Produkt? Beispiel zum Kopieren:
@@ -54,5 +61,6 @@ window.PRODUCTS = [
   //   description: "Ausführliche Beschreibung hier.",
   //   price: "",
   //   image: "",
+  //   etsyUrl: "",
   // },
 ];
