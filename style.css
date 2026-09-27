@@ -54,6 +54,9 @@ a {
    Header
    ========================================================================== */
 .site-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
   padding: 32px clamp(20px, 5vw, 64px) 0;
 }
  
@@ -70,6 +73,54 @@ a {
   width: 72px;
   height: auto;
   display: block;
+}
+
+.cart-toggle {
+  position: absolute;
+  top: 32px;
+  right: clamp(20px, 5vw, 64px);
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--fg);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.cart-toggle:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.cart-toggle:hover .cart-count {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.cart-count[hidden] {
+  display: none;
 }
  
 .wordmark {
@@ -313,4 +364,151 @@ main {
   background: var(--surface);
   border: 1px solid var(--border);
   margin: 20px 0 24px;
+}
+
+.panel-cta {
+  margin-top: 28px;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--fg);
+  color: var(--bg);
+  border: 0;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn-add-cart:hover {
+  opacity: 0.85;
+}
+
+.btn-add-cart:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ==========================================================================
+   Cart panel
+   ========================================================================== */
+.cart-empty {
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 24px;
+}
+
+.cart-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.cart-item-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.cart-item-name {
+  font-weight: 600;
+}
+
+.cart-item-price {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-item-controls button[data-cart-action="inc"],
+.cart-item-controls button[data-cart-action="dec"] {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--fg);
+}
+
+.cart-item-controls button[data-cart-action="inc"]:hover,
+.cart-item-controls button[data-cart-action="dec"]:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.cart-qty {
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.cart-remove {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.cart-remove:hover {
+  color: var(--fg);
+}
+
+.cart-checkout {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-checkout-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+
+.cart-etsy-link {
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cart-etsy-link:hover {
+  opacity: 0.85;
+}
+
+.cart-etsy-link--disabled {
+  background: var(--surface);
+  color: var(--muted);
+  cursor: default;
 }
