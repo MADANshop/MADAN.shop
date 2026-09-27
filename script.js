@@ -9,6 +9,17 @@
   var yearEl = document.getElementById("year");
   var cartToggle = document.getElementById("cart-toggle");
   var cartCountEl = document.getElementById("cart-count");
+  var homeView = document.getElementById("home-view");
+  var categoryView = document.getElementById("category-view");
+  var categoryGrid = document.getElementById("category-grid");
+  var categoryTitle = document.getElementById("category-title");
+  var backBtn = document.getElementById("back-btn");
+
+  var CATEGORIES = [
+    { id: "kabelmanagement", name: "Kabelmanagement" },
+    { id: "merch", name: "Merch" },
+    { id: "sonstiges", name: "Sonstiges" },
+  ];
  
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
@@ -59,10 +70,63 @@
 
   updateCartBadge();
  
-  function renderGrid() {
+  function renderCategories() {
+    if (!categoryGrid) return;
+    categoryGrid.innerHTML = "";
+
+    CATEGORIES.forEach(function (category) {
+      var card = document.createElement("button");
+      card.className = "category-card";
+      card.type = "button";
+
+      var h2 = document.createElement("h2");
+      h2.textContent = category.name;
+
+      var arrow = document.createElement("span");
+      arrow.className = "arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "↗";
+
+      card.appendChild(h2);
+      card.appendChild(arrow);
+
+      card.addEventListener("click", function () {
+        openCategory(category);
+      });
+
+      categoryGrid.appendChild(card);
+    });
+  }
+
+  function openCategory(category) {
+    if (categoryTitle) categoryTitle.textContent = category.name;
+    renderGrid(category.id);
+
+    if (homeView) homeView.hidden = true;
+    if (categoryView) categoryView.hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  function goHome() {
+    if (categoryView) categoryView.hidden = true;
+    if (homeView) homeView.hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener("click", goHome);
+  }
+
+  function renderGrid(categoryId) {
     grid.innerHTML = "";
- 
-    if (!products.length) {
+
+    var list = categoryId
+      ? products.filter(function (p) {
+          return p.category === categoryId;
+        })
+      : products;
+
+    if (!list.length) {
       var empty = document.createElement("div");
       empty.className = "empty-state";
       empty.innerHTML =
@@ -70,8 +134,8 @@
       grid.appendChild(empty);
       return;
     }
- 
-    products.forEach(function (product) {
+
+    list.forEach(function (product) {
       var card = document.createElement("button");
       card.className = "product-card";
       card.type = "button";
@@ -297,5 +361,5 @@
     }
   });
  
-  renderGrid();
+  renderCategories();
 })();
