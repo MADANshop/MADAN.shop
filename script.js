@@ -171,13 +171,14 @@
         var p = findProduct(id);
         var qty = cart[id];
         html += '<div class="cart-item">';
-        html += '<div class="cart-item-main">';
+        html += '<div class="cart-item-info">';
         html += '<span class="cart-item-name">' + escapeHtml(p.name) + "</span>";
         if (p.price) {
           html += '<span class="cart-item-price">' + escapeHtml(p.price) + "</span>";
         }
         html += "</div>";
         html += '<div class="cart-item-controls">';
+        html += '<div class="qty-stepper">';
         html +=
           '<button type="button" data-cart-action="dec" data-id="' +
           id +
@@ -187,10 +188,11 @@
           '<button type="button" data-cart-action="inc" data-id="' +
           id +
           '" aria-label="Menge erhöhen">+</button>';
+        html += "</div>";
         html +=
           '<button type="button" class="cart-remove" data-cart-action="remove" data-id="' +
           id +
-          '">Entfernen</button>';
+          '" aria-label="Artikel entfernen">\u00d7</button>';
         html += "</div>";
         html += "</div>";
       });
