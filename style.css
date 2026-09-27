@@ -147,6 +147,101 @@ main {
   border-bottom: 1px solid var(--border);
   margin-bottom: var(--gap);
 }
+
+.intro--category {
+  padding: 28px 0 32px;
+}
+
+/* ==========================================================================
+   Views (Startseite / Kategorie) & Zurück-Button
+   ========================================================================== */
+.view[hidden] {
+  display: none;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.back-btn:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* ==========================================================================
+   Category grid
+   ========================================================================== */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 96px;
+}
+
+@media (max-width: 860px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category-card {
+  background: var(--bg);
+  padding: 48px 28px;
+  text-align: left;
+  cursor: pointer;
+  border: 0;
+  font-family: inherit;
+  color: inherit;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.category-card:focus-visible {
+  outline-offset: -3px;
+}
+
+.category-card h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.category-card .arrow {
+  font-size: 18px;
+  opacity: 0.5;
+  align-self: flex-end;
+  transition: transform 0.15s ease;
+}
+
+.category-card:hover .arrow,
+.category-card:focus-visible .arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+}
  
 .intro h1 {
   font-family: var(--font-display);
