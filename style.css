@@ -185,9 +185,7 @@ main {
 .category-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap);
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 20px;
   margin-bottom: 96px;
 }
 
@@ -202,7 +200,7 @@ main {
   padding: 48px 28px;
   text-align: left;
   cursor: pointer;
-  border: 0;
+  border: 1px solid var(--border);
   font-family: inherit;
   color: inherit;
   min-height: 160px;
