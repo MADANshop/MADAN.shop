@@ -97,6 +97,13 @@ a {
   color: var(--bg);
 }
 
+.cart-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
 .cart-count {
   position: absolute;
   top: -6px;
