@@ -658,3 +658,6 @@ main {
 .cart-toggle {
   border: none;
 }
+#home-view .intro {
+  border-bottom: none;
+}
