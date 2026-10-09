@@ -661,3 +661,6 @@ main {
 #home-view .intro {
   border-bottom: none;
 }
+.category-card {
+  border-radius: 32px;
+}
