@@ -645,3 +645,13 @@ main {
   background: none;
   color: var(--muted);
 }
+.cart-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.cart-toggle {
+  width: 52px;
+  height: 52px;
+}
