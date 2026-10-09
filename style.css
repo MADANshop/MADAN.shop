@@ -215,6 +215,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   transition: background 0.15s ease, color 0.15s ease;
+  border-color: #000;
 }
 
 .category-card:hover,
