@@ -655,3 +655,6 @@ main {
   width: 52px;
   height: 52px;
 }
+.cart-toggle {
+  border: none;
+}
