@@ -85,7 +85,7 @@
       var arrow = document.createElement("span");
       arrow.className = "arrow";
       arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "↗";
+      arrow.textContent = "\u2197\uFE0E";
 
       card.appendChild(h2);
       card.appendChild(arrow);
