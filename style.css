@@ -665,3 +665,6 @@ main {
 .category-card {
   border-radius: 32px;
 }
+.intro {
+  border-bottom: none;
+}
