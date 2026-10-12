@@ -150,7 +150,7 @@
       var arrow = document.createElement("span");
       arrow.className = "arrow";
       arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "↗";
+      arrow.textContent = "\u2197\uFE0E";
  
       top.appendChild(h2);
       top.appendChild(arrow);
