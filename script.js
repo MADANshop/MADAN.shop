@@ -1,6 +1,6 @@
 (function () {
   "use strict";
- 
+
   var products = window.PRODUCTS || [];
   var grid = document.getElementById("product-grid");
   var overlay = document.getElementById("overlay");
@@ -20,14 +20,12 @@
     { id: "merch", name: "Merch" },
     { id: "sonstiges", name: "Sonstiges" },
   ];
- 
+
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // ---------------------------------------------------------------------
-  // Warenkorb (gespeichert im Browser des Kunden, kein Server nötig)
-  // ---------------------------------------------------------------------
+  // Warenkorb: wird im Browser des Kunden gespeichert
   var CART_STORAGE_KEY = "madanCart";
   var cart = {};
 
@@ -41,7 +39,8 @@
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     } catch (e) {
-      /* localStorage nicht verfügbar — Warenkorb bleibt nur für diese Sitzung erhalten */
+      // Wenn localStorage nicht verfügbar ist, bleibt der Warenkorb
+      // nur für diese Sitzung erhalten.
     }
   }
 
@@ -56,10 +55,13 @@
 
   function updateCartBadge() {
     if (!cartCountEl) return;
+
     var count = 0;
+
     Object.keys(cart).forEach(function (id) {
       count += cart[id];
     });
+
     if (count > 0) {
       cartCountEl.textContent = count;
       cartCountEl.hidden = false;
@@ -69,9 +71,10 @@
   }
 
   updateCartBadge();
- 
+
   function renderCategories() {
     if (!categoryGrid) return;
+
     categoryGrid.innerHTML = "";
 
     CATEGORIES.forEach(function (category) {
@@ -99,17 +102,22 @@
   }
 
   function openCategory(category) {
-    if (categoryTitle) categoryTitle.textContent = category.name;
+    if (categoryTitle) {
+      categoryTitle.textContent = category.name;
+    }
+
     renderGrid(category.id);
 
     if (homeView) homeView.hidden = true;
     if (categoryView) categoryView.hidden = false;
+
     window.scrollTo(0, 0);
   }
 
   function goHome() {
     if (categoryView) categoryView.hidden = true;
     if (homeView) homeView.hidden = false;
+
     window.scrollTo(0, 0);
   }
 
@@ -118,11 +126,13 @@
   }
 
   function renderGrid(categoryId) {
+    if (!grid) return;
+
     grid.innerHTML = "";
 
     var list = categoryId
-      ? products.filter(function (p) {
-          return p.category === categoryId;
+      ? products.filter(function (product) {
+          return product.category === categoryId;
         })
       : products;
 
@@ -130,7 +140,8 @@
       var empty = document.createElement("div");
       empty.className = "empty-state";
       empty.innerHTML =
-        "<strong>Noch keine Produkte</strong>Neue Produkte werden in products.js eingetragen.";
+        "<strong>Noch keine Produkte</strong>" +
+        "Neue Produkte werden in products.js eingetragen.";
       grid.appendChild(empty);
       return;
     }
@@ -140,56 +151,67 @@
       card.className = "product-card";
       card.type = "button";
       card.setAttribute("aria-haspopup", "dialog");
- 
+
+      if (product.image) {
+        var image = document.createElement("img");
+        image.className = "product-card-image";
+        image.src = product.image;
+        image.alt = product.name;
+        image.loading = "lazy";
+        card.appendChild(image);
+      }
+
       var top = document.createElement("div");
       top.className = "card-top";
- 
+
       var h2 = document.createElement("h2");
       h2.textContent = product.name;
- 
+
       var arrow = document.createElement("span");
       arrow.className = "arrow";
       arrow.setAttribute("aria-hidden", "true");
       arrow.textContent = "\u2197\uFE0E";
- 
+
       top.appendChild(h2);
       top.appendChild(arrow);
- 
+
       var tagline = document.createElement("p");
       tagline.className = "tagline";
       tagline.textContent = product.tagline || "";
- 
+
       card.appendChild(top);
       card.appendChild(tagline);
- 
+
       card.addEventListener("click", function () {
         openPanel(product);
       });
- 
+
       grid.appendChild(card);
     });
   }
- 
+
   var lastFocused = null;
- 
+
   function openPanel(product) {
     lastFocused = document.activeElement;
- 
+
     var html = "";
     html += '<p class="panel-eyebrow">MADAN</p>';
     html += "<h2 id=\"panel-title\">" + escapeHtml(product.name) + "</h2>";
- 
+
     if (product.price) {
       html += '<p class="price">' + escapeHtml(product.price) + "</p>";
     }
- 
+
     if (product.image) {
       html +=
         '<img class="product-image" src="' +
         escapeHtml(product.image) +
-        '" alt="" />';
+        '" alt="' +
+        escapeHtml(product.name) +
+        '" />';
     }
- 
+
     html +=
       '<div class="description">' +
       escapeHtml(product.description || "") +
@@ -207,10 +229,11 @@
     document.body.style.overflow = "hidden";
     closeBtn.focus();
   }
- 
+
   function closePanel() {
     overlay.hidden = true;
     document.body.style.overflow = "";
+
     if (lastFocused) {
       lastFocused.focus();
     }
@@ -231,56 +254,72 @@
       html += '<p class="cart-empty">Dein Warenkorb ist noch leer.</p>';
     } else {
       html += '<div class="cart-list">';
+
       ids.forEach(function (id) {
-        var p = findProduct(id);
-        var qty = cart[id];
+        var product = findProduct(id);
+        var quantity = cart[id];
+
         html += '<div class="cart-item">';
         html += '<div class="cart-item-info">';
-        html += '<span class="cart-item-name">' + escapeHtml(p.name) + "</span>";
-        if (p.price) {
-          html += '<span class="cart-item-price">' + escapeHtml(p.price) + "</span>";
+        html +=
+          '<span class="cart-item-name">' +
+          escapeHtml(product.name) +
+          "</span>";
+
+        if (product.price) {
+          html +=
+            '<span class="cart-item-price">' +
+            escapeHtml(product.price) +
+            "</span>";
         }
+
         html += "</div>";
         html += '<div class="cart-item-controls">';
         html += '<div class="qty-stepper">';
         html +=
           '<button type="button" data-cart-action="dec" data-id="' +
-          id +
+          escapeHtml(id) +
           '" aria-label="Menge verringern">\u2212</button>';
-        html += '<span class="cart-qty">' + qty + "</span>";
+        html += '<span class="cart-qty">' + quantity + "</span>";
         html +=
           '<button type="button" data-cart-action="inc" data-id="' +
-          id +
+          escapeHtml(id) +
           '" aria-label="Menge erhöhen">+</button>';
         html += "</div>";
         html +=
           '<button type="button" class="cart-remove" data-cart-action="remove" data-id="' +
-          id +
+          escapeHtml(id) +
           '" aria-label="Artikel entfernen">\u00d7</button>';
         html += "</div>";
         html += "</div>";
       });
-      html += "</div>";
 
+      html += "</div>";
       html += '<div class="cart-checkout">';
       html +=
-        '<p class="cart-checkout-note">Der Kauf läuft über unseren Etsy-Shop. Öffne die Artikel dort einzeln zum Bezahlen:</p>';
+        '<p class="cart-checkout-note">' +
+        "Der Kauf läuft über unseren Etsy-Shop. " +
+        "Öffne die Artikel dort einzeln zum Bezahlen:" +
+        "</p>";
+
       ids.forEach(function (id) {
-        var p = findProduct(id);
-        if (p.etsyUrl) {
+        var product = findProduct(id);
+
+        if (product.etsyUrl) {
           html +=
             '<a class="cart-etsy-link" href="' +
-            escapeHtml(p.etsyUrl) +
+            escapeHtml(product.etsyUrl) +
             '" target="_blank" rel="noopener">' +
-            escapeHtml(p.name) +
-            " bei Etsy kaufen ↗</a>";
+            escapeHtml(product.name) +
+            " bei Etsy kaufen \u2197\uFE0E</a>";
         } else {
           html +=
             '<span class="cart-etsy-link cart-etsy-link--disabled">' +
-            escapeHtml(p.name) +
+            escapeHtml(product.name) +
             " — Etsy-Link folgt</span>";
         }
       });
+
       html += "</div>";
     }
 
@@ -289,31 +328,34 @@
     document.body.style.overflow = "hidden";
     closeBtn.focus();
   }
- 
-  function escapeHtml(str) {
+
+  function escapeHtml(value) {
     var div = document.createElement("div");
-    div.textContent = str;
+    div.textContent = value;
     return div.innerHTML;
   }
- 
-  panelContent.addEventListener("click", function (e) {
-    var btn = e.target.closest("[data-cart-action]");
-    if (!btn) return;
 
-    var action = btn.getAttribute("data-cart-action");
-    var id = btn.getAttribute("data-id");
+  panelContent.addEventListener("click", function (event) {
+    var button = event.target.closest("[data-cart-action]");
+    if (!button) return;
+
+    var action = button.getAttribute("data-cart-action");
+    var id = button.getAttribute("data-id");
 
     if (action === "add-to-cart") {
       cart[id] = (cart[id] || 0) + 1;
       saveCart();
       updateCartBadge();
-      var original = btn.textContent;
-      btn.textContent = "Hinzugefügt ✓";
-      btn.disabled = true;
+
+      var originalText = button.textContent;
+      button.textContent = "Hinzugefügt ✓";
+      button.disabled = true;
+
       setTimeout(function () {
-        btn.textContent = original;
-        btn.disabled = false;
+        button.textContent = originalText;
+        button.disabled = false;
       }, 1200);
+
       return;
     }
 
@@ -327,7 +369,11 @@
 
     if (action === "dec") {
       cart[id] = (cart[id] || 0) - 1;
-      if (cart[id] <= 0) delete cart[id];
+
+      if (cart[id] <= 0) {
+        delete cart[id];
+      }
+
       saveCart();
       updateCartBadge();
       openCart();
@@ -339,7 +385,6 @@
       saveCart();
       updateCartBadge();
       openCart();
-      return;
     }
   });
 
@@ -348,18 +393,18 @@
   }
 
   closeBtn.addEventListener("click", closePanel);
- 
-  overlay.addEventListener("click", function (e) {
-    if (e.target === overlay) {
+
+  overlay.addEventListener("click", function (event) {
+    if (event.target === overlay) {
       closePanel();
     }
   });
- 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !overlay.hidden) {
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !overlay.hidden) {
       closePanel();
     }
   });
- 
+
   renderCategories();
 })();
