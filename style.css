@@ -685,3 +685,231 @@ main {
 .intro {
   border-bottom: none;
 }
+/* ==========================================================================
+   Produktkarten-Bilder und eigene Produktseite
+   ========================================================================== */
+
+.product-card {
+  min-width: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.product-card-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin: 0 0 20px;
+  flex: 0 0 auto;
+}
+
+.product-page-cart {
+  text-decoration: none;
+}
+
+.product-page-inner {
+  max-width: 760px;
+  margin: 0 auto 80px;
+}
+
+.product-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 32px;
+  color: var(--fg);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.product-back-link:hover {
+  text-decoration: underline;
+}
+
+.product-page-eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-page-title {
+  margin: 0 0 24px;
+  padding-right: 48px;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.product-gallery {
+  width: min(100%, 500px);
+  margin: 0 auto 30px;
+}
+
+.product-gallery[hidden],
+.product-page-content[hidden],
+.product-not-found[hidden],
+.product-page-price[hidden],
+.product-gallery-dots[hidden],
+.gallery-arrow[hidden],
+.product-etsy-link[hidden] {
+  display: none !important;
+}
+
+.product-gallery-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  touch-action: pan-y;
+}
+
+.product-gallery-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gallery-arrow:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.gallery-arrow--prev {
+  left: 12px;
+}
+
+.gallery-arrow--next {
+  right: 12px;
+}
+
+.product-gallery-counter {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--fg);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.product-gallery-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1px solid var(--fg);
+  border-radius: 50%;
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.product-gallery-dot.is-active {
+  background: var(--fg);
+}
+
+.product-page-price {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.product-description-area h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.product-page-description {
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.product-page-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(100%, 420px);
+  margin-top: 28px;
+}
+
+.product-page-actions .btn-add-cart,
+.product-page-actions .cart-etsy-link {
+  width: 100%;
+}
+
+.product-not-found {
+  padding: 32px 0 80px;
+}
+
+.product-not-found h1 {
+  font-family: var(--font-display);
+  font-size: 30px;
+}
+
+@media (max-width: 560px) {
+  .product-page-inner {
+    margin-bottom: 56px;
+  }
+
+  .product-back-link {
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+
+  .product-page-title {
+    margin-bottom: 20px;
+  }
+
+  .product-gallery {
+    margin-bottom: 24px;
+  }
+
+  .gallery-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
