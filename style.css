@@ -481,7 +481,73 @@ main {
   object-fit: cover;
   background: var(--surface);
   border: 1px solid var(--border);
+}
+
+.product-gallery {
+  position: relative;
   margin: 20px 0 24px;
+}
+
+.product-gallery-viewport {
+  position: relative;
+}
+
+.product-gallery-img {
+  display: none;
+}
+
+.product-gallery-img.is-active {
+  display: block;
+}
+
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gallery-nav:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.gallery-prev {
+  left: 10px;
+}
+
+.gallery-next {
+  right: 10px;
+}
+
+.gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.gallery-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.gallery-dot.is-active {
+  background: var(--fg);
 }
 
 .panel-cta {
