@@ -31,7 +31,15 @@ window.PRODUCTS = [
     description:
       "Der kompakte Kabelkamm sorgt für ein einfaches und stilvolles Kabelmanagement. Er fixiert bis zu 5 Kabel unterschiedlicher Stärke sicher an Ort und Stelle, verhindert Verheddern und hält deinen Schreibtisch dauerhaft aufgeräumt.\n\nWird unter der Tischplatte befestigt und bleibt dabei unauffällig im Hintergrund.",
     price: "",
-    image: "4erkabelkamm.jpg",
+    image: "https://i.ibb.co/6J4Q3C17/kabelkamm-foto-1.jpg
+https://i.ibb.co/sv9m2zYC/kabelkamm-foto-2.jpg
+https://i.ibb.co/FkGQL6jL/kabelkamm-foto-3.jpg
+https://i.ibb.co/6cT4kBCQ/kabelkamm-foto-4-clip-grau.jpg
+https://i.ibb.co/gC1ch7d/kabelkamm-foto-5-clip-holz.jpg
+https://i.ibb.co/rKNCC2gT/kabelkamm-technische-zeichnung.jpg
+https://i.ibb.co/Kx6bhSsB/logo-schwarz.jpg
+https://i.ibb.co/G3b60CTk/logo-weiss.png
+https://i.ibb.co/27zQXVHH/warenkorb-icon.jpg",
     etsyUrl: "",
   },
 
