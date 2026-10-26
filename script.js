@@ -44,6 +44,16 @@
     }
   }
 
+  function getImages(product) {
+    if (Array.isArray(product.images) && product.images.length) {
+      return product.images.filter(Boolean);
+    }
+    if (product.image) {
+      return [product.image];
+    }
+    return [];
+  }
+
   function findProduct(id) {
     for (var i = 0; i < products.length; i++) {
       if (products[i].id === id) {
@@ -152,10 +162,11 @@
       card.type = "button";
       card.setAttribute("aria-haspopup", "dialog");
 
-      if (product.image) {
+      var cardImages = getImages(product);
+      if (cardImages.length) {
         var image = document.createElement("img");
         image.className = "product-card-image";
-        image.src = product.image;
+        image.src = cardImages[0];
         image.alt = product.name;
         image.loading = "lazy";
         card.appendChild(image);
@@ -203,13 +214,44 @@
       html += '<p class="price">' + escapeHtml(product.price) + "</p>";
     }
 
-    if (product.image) {
+    var images = getImages(product);
+
+    if (images.length === 1) {
       html +=
         '<img class="product-image" src="' +
-        escapeHtml(product.image) +
+        escapeHtml(images[0]) +
         '" alt="' +
         escapeHtml(product.name) +
         '" />';
+    } else if (images.length > 1) {
+      html += '<div class="product-gallery" data-gallery data-index="0">';
+      html += '<div class="product-gallery-viewport">';
+      images.forEach(function (src, i) {
+        html +=
+          '<img class="product-image product-gallery-img' +
+          (i === 0 ? " is-active" : "") +
+          '" src="' +
+          escapeHtml(src) +
+          '" alt="' +
+          escapeHtml(product.name) +
+          " (" +
+          (i + 1) +
+          "/" +
+          images.length +
+          ')" />';
+      });
+      html += "</div>";
+      html +=
+        '<button type="button" class="gallery-nav gallery-prev" data-cart-action="gallery-prev" aria-label="Vorheriges Bild">\u2190</button>';
+      html +=
+        '<button type="button" class="gallery-nav gallery-next" data-cart-action="gallery-next" aria-label="Nächstes Bild">\u2192</button>';
+      html += '<div class="gallery-dots">';
+      images.forEach(function (_, i) {
+        html +=
+          '<span class="gallery-dot' + (i === 0 ? " is-active" : "") + '"></span>';
+      });
+      html += "</div>";
+      html += "</div>";
     }
 
     html +=
@@ -341,6 +383,25 @@
 
     var action = button.getAttribute("data-cart-action");
     var id = button.getAttribute("data-id");
+
+    if (action === "gallery-prev" || action === "gallery-next") {
+      var galleryEl = btn.closest("[data-gallery]");
+      if (!galleryEl) return;
+      var imgs = galleryEl.querySelectorAll(".product-gallery-img");
+      var dots = galleryEl.querySelectorAll(".gallery-dot");
+      var current = parseInt(galleryEl.getAttribute("data-index"), 10) || 0;
+      var next =
+        action === "gallery-next"
+          ? (current + 1) % imgs.length
+          : (current - 1 + imgs.length) % imgs.length;
+
+      imgs[current].classList.remove("is-active");
+      imgs[next].classList.add("is-active");
+      if (dots[current]) dots[current].classList.remove("is-active");
+      if (dots[next]) dots[next].classList.add("is-active");
+      galleryEl.setAttribute("data-index", next);
+      return;
+    }
 
     if (action === "add-to-cart") {
       cart[id] = (cart[id] || 0) + 1;
