@@ -46,7 +46,7 @@ window.PRODUCTS = [
     price: "",
     images: [
       "https://i.ibb.co/FkGQL6jL/kabelkamm-foto-3.jpg",
-      "https://i.ibb.co/sv9m2zYC/kabelkamm-foto-2.jpg",
+      "https://i.ibb.co/prhb6XPj/kabelkamm-foto-2.jpg",
     ],
     etsyUrl: "",
   },
