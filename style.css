@@ -204,11 +204,12 @@ main {
 }
 
 .category-card {
-  background: var(--bg);
+  background: #EAE8E1;
   padding: 48px 28px;
   text-align: left;
   cursor: pointer;
-  border: 1px solid var(--border);
+  border: none;
+  border-radius: 32px;
   font-family: inherit;
   color: inherit;
   min-height: 160px;
@@ -216,7 +217,6 @@ main {
   flex-direction: column;
   justify-content: space-between;
   transition: background 0.15s ease, color 0.15s ease;
-  border-color: #000;
 }
 
 .category-card:hover,
