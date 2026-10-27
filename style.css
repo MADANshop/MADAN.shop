@@ -439,32 +439,45 @@ main {
   margin: 0 0 12px;
 }
  
-.panel h2 {
+.panel h2,
+.product-detail h2 {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 28px;
   margin: 0 0 4px;
+}
+ 
+.panel h2 {
   padding-right: 40px;
 }
  
-.panel .price {
+.panel .price,
+.product-detail .price {
   font-size: 15px;
   color: var(--muted);
   margin: 0 0 24px;
 }
  
-.panel .description {
+.panel .description,
+.product-detail .description {
   font-size: 15px;
   line-height: 1.7;
   white-space: pre-line;
 }
  
-.panel img.product-image {
+.panel img.product-image,
+.product-detail img.product-image {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   background: var(--surface);
   border: 1px solid var(--border);
+}
+
+.product-detail {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 0 80px;
 }
 
 .product-gallery {
@@ -536,14 +549,20 @@ main {
 
 .panel-cta {
   margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.btn-add-cart {
+.btn-etsy {
+  display: block;
   width: 100%;
   padding: 14px 16px;
   background: var(--fg);
   color: var(--bg);
   border: 0;
+  text-align: center;
+  text-decoration: none;
   font-family: inherit;
   font-size: 15px;
   font-weight: 600;
@@ -551,8 +570,36 @@ main {
   transition: opacity 0.15s ease;
 }
 
-.btn-add-cart:hover {
+.btn-etsy:hover {
   opacity: 0.85;
+}
+
+.btn-etsy--disabled {
+  background: var(--surface);
+  color: var(--muted);
+  cursor: default;
+}
+
+.btn-etsy--disabled:hover {
+  opacity: 1;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  color: var(--fg);
+  border: 1px solid var(--fg);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-add-cart:hover {
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .btn-add-cart:disabled {
