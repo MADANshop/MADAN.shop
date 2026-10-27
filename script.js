@@ -172,26 +172,25 @@
         card.appendChild(image);
       }
 
-      var top = document.createElement("div");
-      top.className = "card-top";
+      var info = document.createElement("div");
+      info.className = "card-info";
 
       var h2 = document.createElement("h2");
+      h2.className = "card-title";
       h2.textContent = product.name;
+      info.appendChild(h2);
 
-      var arrow = document.createElement("span");
-      arrow.className = "arrow";
-      arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "\u2197\uFE0E";
+      var price = document.createElement("p");
+      price.className = "card-price";
+      price.textContent = product.price || "";
+      info.appendChild(price);
 
-      top.appendChild(h2);
-      top.appendChild(arrow);
+      var cta = document.createElement("span");
+      cta.className = "card-cta";
+      cta.textContent = "Shop now";
+      info.appendChild(cta);
 
-      var tagline = document.createElement("p");
-      tagline.className = "tagline";
-      tagline.textContent = product.tagline || "";
-
-      card.appendChild(top);
-      card.appendChild(tagline);
+      card.appendChild(info);
 
       card.addEventListener("click", function () {
         openPanel(product);
