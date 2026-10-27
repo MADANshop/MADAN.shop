@@ -45,7 +45,7 @@ window.PRODUCTS = [
       "Die größere Variante unseres Kabelkamms: fixiert bis zu 6 Kabel unterschiedlicher Stärke sicher an Ort und Stelle, verhindert Verheddern und hält deinen Schreibtisch dauerhaft aufgeräumt.\n\nWird unter der Tischplatte befestigt und bleibt dabei unauffällig im Hintergrund.",
     price: "",
     images: [
-      "https://i.ibb.co/prhb6XPj/kabelkamm-foto-2.jpg",
+      "https://i.ibb.co/SD0BxMJR/kabelkamm-foto-neu.jpg",
       "https://i.ibb.co/FkGQL6jL/kabelkamm-foto-3.jpg",
     ],
     etsyUrl: "",
