@@ -477,7 +477,7 @@ main {
 .product-detail {
   max-width: 560px;
   margin: 0 auto;
-  padding: 24px 0 80px;
+  padding: 24px 0 140px;
 }
 
 .product-gallery {
@@ -548,18 +548,32 @@ main {
 }
 
 .panel-cta {
-  margin-top: 28px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 16px clamp(20px, 5vw, 64px) calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.panel-cta > * {
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .btn-etsy {
   display: block;
   width: 100%;
   padding: 14px 16px;
-  background: var(--fg);
-  color: var(--bg);
+  background: #002147;
+  color: #ffffff;
   border: 0;
   text-align: center;
   text-decoration: none;
