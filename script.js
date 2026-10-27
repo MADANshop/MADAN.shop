@@ -129,6 +129,7 @@
 
   function goHome() {
     if (categoryView) categoryView.hidden = true;
+    if (productView) productView.hidden = true;
     if (homeView) homeView.hidden = false;
 
     window.scrollTo(0, 0);
@@ -136,6 +137,14 @@
 
   if (backBtn) {
     backBtn.addEventListener("click", goHome);
+  }
+
+  var brandLink = document.querySelector(".brand");
+  if (brandLink) {
+    brandLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      goHome();
+    });
   }
 
   function renderGrid(categoryId) {
