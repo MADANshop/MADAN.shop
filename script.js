@@ -14,6 +14,9 @@
   var categoryGrid = document.getElementById("category-grid");
   var categoryTitle = document.getElementById("category-title");
   var backBtn = document.getElementById("back-btn");
+  var productView = document.getElementById("product-view");
+  var productDetail = document.getElementById("product-detail");
+  var productBackBtn = document.getElementById("product-back-btn");
 
   var CATEGORIES = [
     { id: "kabelmanagement", name: "Kabelmanagement" },
@@ -193,7 +196,7 @@
       card.appendChild(info);
 
       card.addEventListener("click", function () {
-        openPanel(product);
+        openProduct(product);
       });
 
       grid.appendChild(card);
@@ -202,12 +205,12 @@
 
   var lastFocused = null;
 
-  function openPanel(product) {
-    lastFocused = document.activeElement;
+  function openProduct(product) {
+    if (!productDetail) return;
 
     var html = "";
     html += '<p class="panel-eyebrow">MADAN</p>';
-    html += "<h2 id=\"panel-title\">" + escapeHtml(product.name) + "</h2>";
+    html += "<h2>" + escapeHtml(product.name) + "</h2>";
 
     if (product.price) {
       html += '<p class="price">' + escapeHtml(product.price) + "</p>";
@@ -259,16 +262,37 @@
       "</div>";
 
     html += '<div class="panel-cta">';
+    if (product.etsyUrl) {
+      html +=
+        '<a class="btn-etsy" href="' +
+        escapeHtml(product.etsyUrl) +
+        '" target="_blank" rel="noopener">Im Etsy Shop öffnen</a>';
+    } else {
+      html += '<span class="btn-etsy btn-etsy--disabled">Im Etsy Shop öffnen</span>';
+    }
     html +=
       '<button type="button" class="btn-add-cart" data-cart-action="add-to-cart" data-id="' +
       escapeHtml(product.id) +
       '">In den Warenkorb</button>';
     html += "</div>";
 
-    panelContent.innerHTML = html;
-    overlay.hidden = false;
-    document.body.style.overflow = "hidden";
-    closeBtn.focus();
+    productDetail.innerHTML = html;
+
+    if (categoryView) categoryView.hidden = true;
+    if (productView) productView.hidden = false;
+
+    window.scrollTo(0, 0);
+  }
+
+  function closeProduct() {
+    if (productView) productView.hidden = true;
+    if (categoryView) categoryView.hidden = false;
+
+    window.scrollTo(0, 0);
+  }
+
+  if (productBackBtn) {
+    productBackBtn.addEventListener("click", closeProduct);
   }
 
   function closePanel() {
@@ -376,7 +400,7 @@
     return div.innerHTML;
   }
 
-  panelContent.addEventListener("click", function (event) {
+  document.addEventListener("click", function (event) {
     var button = event.target.closest("[data-cart-action]");
     if (!button) return;
 
@@ -384,7 +408,7 @@
     var id = button.getAttribute("data-id");
 
     if (action === "gallery-prev" || action === "gallery-next") {
-      var galleryEl = btn.closest("[data-gallery]");
+      var galleryEl = button.closest("[data-gallery]");
       if (!galleryEl) return;
       var imgs = galleryEl.querySelectorAll(".product-gallery-img");
       var dots = galleryEl.querySelectorAll(".gallery-dot");
@@ -461,8 +485,12 @@
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && !overlay.hidden) {
+    if (event.key !== "Escape") return;
+
+    if (!overlay.hidden) {
       closePanel();
+    } else if (productView && !productView.hidden) {
+      closeProduct();
     }
   });
 
