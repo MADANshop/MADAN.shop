@@ -34,10 +34,10 @@ window.PRODUCTS = [
       "Der kompakte Kabelkamm sorgt für ein einfaches und stilvolles Kabelmanagement. Er fixiert bis zu 4 Kabel unterschiedlicher Stärke sicher an Ort und Stelle, verhindert Verheddern und hält deinen Schreibtisch dauerhaft aufgeräumt.\n\nWird unter der Tischplatte befestigt und bleibt dabei unauffällig im Hintergrund.",
     price: "6–11 €",
     images: [
-      "https://i.ibb.co/6J4Q3C17/kabelkamm-foto-1.jpg",
-      "https://i.ibb.co/m5q9BTzh/kabelkamm-foto-4-clip-grau.jpg",
-      "https://i.ibb.co/67JY0Kdw/kabelkamm-foto-5-clip-holz.jpg",
-      "https://i.ibb.co/rKNCC2gT/kabelkamm-technische-zeichnung.jpg",
+      "assets/4er-kabelkamm-foto-1.jpg",
+      "assets/4er-kabelkamm-foto-2.jpg",
+      "assets/4er-kabelkamm-foto-3.jpg",
+      "assets/4er-kabelkamm-technische-zeichnung.jpg",
     ],
     etsyUrl:
       "https://www.etsy.com/de/listing/4587126616/kabelhalter-kabelfuhrung-o-3d-gedruckter",
